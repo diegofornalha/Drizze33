@@ -5,7 +5,6 @@ export default function FloatReviewer(props) {
     threshold, setThreshold,
     floatMode, rawFloatInput,
     floatEvents, setFloatEvents,
-    setFloatGroup, setFloatEventPairs,
   } = props
 
   return (
@@ -16,7 +15,6 @@ export default function FloatReviewer(props) {
         threshold={threshold} setThreshold={setThreshold}
         rawFloatInput={rawFloatInput}
         floatEvents={floatEvents} setFloatEvents={setFloatEvents}
-        setFloatGroup={setFloatGroup} setFloatEventPairs={setFloatEventPairs}
       />
     </div>
   )

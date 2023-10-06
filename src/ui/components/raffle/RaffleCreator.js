@@ -5,7 +5,7 @@ import Decimal from 'decimal.js'
 
 import RaffleCard from './RaffleCard'
 
-import { classNames, floatEventInputHandler, floatGroupInputHandler, getTimezone, isValidHttpUrl } from '../../lib/utils'
+import { classNames, floatEventInputHandler, getTimezone, isValidHttpUrl } from '../../lib/utils'
 
 import { useRecoilState } from "recoil"
 import {
@@ -16,7 +16,6 @@ import {
 } from "../../lib/atoms"
 import EligibilityModeSelector, {
   EligibilityModeFLOAT,
-  EligibilityModeFLOATGroup,
   EligibilityModeWhitelist
 } from '../eligibility/EligibilityModeSelector'
 import FloatReviewer from '../eligibility/FloatReviewer'
@@ -46,7 +45,7 @@ export const convertSelectTokensToDisplays = (selectedTokens) => {
 
 export default function RaffleCreator(props) {
   const router = useRouter()
-  const { float, float_group } = router.query
+  const { float } = router.query
 
   const [, setShowBasicNotification] = useRecoilState(showBasicNotificationState)
   const [, setBasicNotificationContent] = useRecoilState(basicNotificationContentState)
@@ -74,7 +73,6 @@ export default function RaffleCreator(props) {
   // [{eventID: xxx, eventHost: xxx}]
   const [floatEventPairs, setFloatEventPairs] = useState([])
   // {groupName: xxx, groupHost: xxx}
-  const [floatGroup, setFloatGroup] = useState(null)
   const [threshold, setThreshold] = useState('')
 
   const [showPreview, setShowPreview] = useState(false)
@@ -101,13 +99,8 @@ export default function RaffleCreator(props) {
       }).catch(console.error)
     }
 
-    if (float_group && float_group.trim() != '') {
-      floatGroupInputHandler(float_group).then((group) => {
-        setFloatGroup(group)
-        setEligibilityMode(EligibilityModeFLOATGroup)
-      })
-    }
-  }, [float, float_group])
+
+  }, [float])
 
   const checkBasicParams = () => {
     if (!name || name.trim() == "") {
@@ -283,11 +276,10 @@ export default function RaffleCreator(props) {
         <FloatReviewer
           floatMode={mode.detail}
           threshold={threshold} setThreshold={setThreshold}
-          rawFloatInput={float || float_group}
+          rawFloatInput={float}
           floatEvents={floatEvents}
           setFloatEvents={setFloatEvents}
           setFloatEventPairs={setFloatEventPairs}
-          setFloatGroup={setFloatGroup}
         />
       )
     }
@@ -325,7 +317,6 @@ export default function RaffleCreator(props) {
               endAt={endAt}
               registrationEndAt={registrationDeadline}
               eligibilityMode={eligibilityMode}
-              floatGroup={floatGroup}
               floatEventPairs={floatEventPairs}
               threshold={threshold}
               selectedTokens={selectedTokens}

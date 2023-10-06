@@ -6,8 +6,7 @@ import {
   showBasicNotificationState,
   transactionInProgressState,
 } from "../../lib/atoms"
-import { classNames, floatEventInputHandler, floatGroupInputHandler, isValidFlowAddress } from "../../lib/utils"
-import { getFloatEvent, getFloatEventsInGroup } from '../../lib/float-scripts'
+import { classNames, floatEventInputHandler, isValidFlowAddress } from "../../lib/utils"
 import FloatEventList from './FloatEventList'
 import Warning from '../common/Warning'
 import publicConfig from '../../publicConfig'
@@ -20,14 +19,6 @@ export const FloatModeFloatEvent = {
   inputHandler: floatEventInputHandler
 }
 
-export const FloatModeFloatGroup = {
-  key: "FLOATGroup",
-  title: "FLOAT Group",
-  description: `Enter the url of the FLOAT Group. Or enter group name and group creator, concat them with "@". For instance: ${publicConfig.chainEnv == "testnet" ? "Drizzle@0x257c27ba4951541d" : "Drizzle@0x39b144ab4d348e2b"}.`,
-  placeholder: `${publicConfig.chainEnv == "testnet" ? "Drizzle@0x257c27ba4951541d" : "Drizzle@0x39b144ab4d348e2b"}`,
-  inputHandler: floatGroupInputHandler
-}
-
 export default function FloatPicker(props) {
   const [, setShowBasicNotification] = useRecoilState(showBasicNotificationState)
   const [, setBasicNotificationContent] = useRecoilState(basicNotificationContentState)
@@ -35,7 +26,7 @@ export default function FloatPicker(props) {
 
   const [rawEventStr, setRawEventStr] = useState('')
 
-  // FLOAT || FLOATGroup
+  // FLOAT 
   const mode = props.mode || FloatModeFloatEvent
   const disabled = props.disabled || false
 
@@ -44,7 +35,6 @@ export default function FloatPicker(props) {
     rawFloatInput,
     floatEvents,
     setFloatEvents,
-    setFloatGroup,
     setFloatEventPairs
   } = props
   
@@ -57,7 +47,6 @@ export default function FloatPicker(props) {
   useEffect(() => {
     setThreshold('')
     setFloatEvents([])
-    setFloatGroup(null)
     setFloatEventPairs([])
     setRawEventStr('')
   }, [mode])
@@ -120,24 +109,11 @@ export default function FloatPicker(props) {
                   } else {
                     throw "No events"
                   }
-                } else if (mode.key === "FLOATGroup") {
-                  const group = await mode.inputHandler(rawEventStr)
-                  const _events = await getFloatEventsInGroup(group.groupHost, group.groupName)
-                  if (_events && _events.length > 0) {
-                    events = _events.sort((a, b) => b.eventId - a.eventId)
-                    setFloatGroup(group)
-                    setFloatEvents(events)
-                  } else {
-                    throw "Group not exist or no events in group"
-                  }
                 }
-
               } catch (error) {
                 let err = error.message || error
                 if (err.includes("This event does not exist in the account")) {
                   err = "This event does not exist in the account"
-                } else if (err.includes("This group doesn't exist")) {
-                  err = "This group doesn't exist"
                 }
                 setShowBasicNotification(true)
                 setBasicNotificationContent({ type: "exclamation", title: "Invalid Params", detail: err })

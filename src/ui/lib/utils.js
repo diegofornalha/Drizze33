@@ -111,36 +111,6 @@ export const floatEventInputHandler = async (raw) => {
   return [{ eventID: id, eventHost: host }]
 }
 
-export const floatGroupInputHandler = async (raw) => {
-  const result = raw.trim().replace("#", "").split("@")
-  let host = ''
-  let groupName = ''
-  if (result.length != 2) {
-    const urlParseResult = decodeURI(raw.trim()).replace(`${publicConfig.floatURL}/`, "").replaceAll("/", "").split('group')
-    if (urlParseResult.length != 2) {
-      throw "Invalid pair"
-    }
-
-    [host, groupName] = urlParseResult
-  } else {
-    [groupName, host] = result
-  }
-
-  if (!isValidFlowAddress(host)) {
-    const addresses = await addressOfDomainsFetcher("addressOfDomainsFetcher", [host])
-    if (Object.keys(addresses).length == 0) {
-      throw "Invalid host"
-    }
-    host = addresses[host]
-  }
-
-  if (groupName && groupName == '') {
-    throw "Invalid groupName"
-  }
-
-  return { groupName: groupName, groupHost: host }
-}
-
 export const isValidHttpUrl = (string) => {
   let url
 
@@ -289,7 +259,6 @@ export const getVerifierType = (drizzle, type) => {
   }
 
   if (verifier.type === "Whitelist") return "Whitelist"
-  if (verifier.type === "FLOATGroup") return "FLOAT Group"
   if (verifier.type === "FLOATs") return "FLOAT"
 }
 

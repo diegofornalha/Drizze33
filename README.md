@@ -46,7 +46,6 @@ To decide who is eligible for your Raffle, you can check **[here](#who-is-eligib
 In Drizzle, you can decide who is eligible for your rewards by using our different modes.
 
 - **[FLOAT Event](https://floats.city)**. You can limit the eligibility to people who own FLOATs of specific FLOAT Event at the time of the DROP or NFT Raffle being created.
-- **[FLOAT Group](https://floats.city)**. You can also limit the eligibility to people who own FLOATs in a FLOAT Group. You can set a threshold to the number of FLOATs the users should have.
 - Whitelist. You can upload a whitelist. Only accounts on the whitelist are eligible for rewards.
 
 ## Roadmap

@@ -1,6 +1,6 @@
 import { convertCadenceDateTime } from "../../lib/utils"
 import publicConfig from "../../publicConfig"
-import { EligibilityModeFLOAT, EligibilityModeFLOATGroup, EligibilityModeWhitelist, EligibilityModeWhitelistWitAmount } from "../eligibility/EligibilityModeSelector"
+import { EligibilityModeFLOAT, EligibilityModeWhitelist, EligibilityModeWhitelistWitAmount } from "../eligibility/EligibilityModeSelector"
 
 const getCriteriaLabel = (drizzle, type) => {
   let verifier = null
@@ -17,23 +17,6 @@ const getCriteriaLabel = (drizzle, type) => {
     return (
       <label className="w-full font-flow font-medium text-sm break-words">
         {`On the whitelist of this ${type}`}
-      </label>
-    )
-  }
-
-  if (verifier.type === "FLOATGroup") {
-    return (
-      <label className="w-full font-flow font-medium text-sm break-words">
-        Own <span className="font-bold text-drizzle-green">{verifier.threshold} </span>
-        FLOAT(s) in Group&nbsp;<span className="font-bold">
-          <a
-            href={`${publicConfig.floatURL}/${verifier.group.host}/group/${verifier.group.name}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-drizzle-green">
-            {verifier.group.name}
-          </a>
-        </span>&nbsp;<span className="font-bold">MINTED BEFORE</span> <span className="font-bold text-drizzle-green">{convertCadenceDateTime(verifier.mintedBefore || verifier.receivedBefore).toLocaleString()}</span>
       </label>
     )
   }
@@ -56,7 +39,7 @@ const getCriteriaLabel = (drizzle, type) => {
 }
 
 const getCriteriaLabelPreview = (
-  eligibilityMode, floatGroup, floatEventPairs, threshold, type
+  eligibilityMode, floatEventPairs, threshold, type
 ) => {
   if (!eligibilityMode) return null
   // WhitelistWithAmount & Whitelist
@@ -89,7 +72,7 @@ const getCriteriaLabelPreview = (
 }
 
 export default function CriteriaCard(props) {
-  const {type, drop, raffle, eligibilityMode, floatGroup, floatEventPairs, threshold} = props
+  const {type, drop, raffle, eligibilityMode, floatEventPairs, threshold} = props
   const drizzle = drop ? drop : (raffle ? raffle : null)
 
   return (
@@ -100,7 +83,7 @@ export default function CriteriaCard(props) {
       <div className={`flex flex-col gap-y-2 ring-2 ring-drizzle-green rounded-2xl p-3 `}>
         <label className="text-center font-flow font-semibold">WHO IS ELIGIBLE?</label>
         {drizzle ?  getCriteriaLabel(drizzle, type)
-        : getCriteriaLabelPreview(eligibilityMode, floatGroup, floatEventPairs, threshold, type)
+        : getCriteriaLabelPreview(eligibilityMode, floatEventPairs, threshold, type)
         }
       </div>
     </div>

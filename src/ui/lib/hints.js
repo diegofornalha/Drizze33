@@ -25,7 +25,6 @@ const InvalidThreshold = "Invalid threshold"
 const InvalidIdenticalAmount = "Invalid identical amount"
 const InvalidTotalAmount = "Invalid total amount"
 const InvalidTokenBalance = "Invalid token balance"
-const EmptyFloatGroup = "Empty FLOAT Group"
 const InsufficientNFTs = "The number of NFTs selected as reward should be more than the number of winners"
 
 const Hints = {
@@ -53,7 +52,6 @@ const Hints = {
   InvalidTotalAmount,
   InvalidTokenAmount,
   InvalidTokenBalance,
-  EmptyFloatGroup,
   InsufficientNFTs
 }
 

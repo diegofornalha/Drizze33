@@ -105,7 +105,7 @@ export default function DropCard(props) {
 
   // Only created Drop has claimStatus
   const { drop, claimStatus, user, token,
-    eligibilityMode, packetMode, floatGroup, floatEventPairs, threshold } = props
+    eligibilityMode, packetMode, floatEventPairs, threshold } = props
   const dropID = (drop && drop.dropID) || props.dropID
   const name = (drop && drop.name) || props.name
   const host = (drop && drop.host) || props.host
@@ -140,7 +140,6 @@ export default function DropCard(props) {
         <CriteriaCard
           type="DROP"
           drop={drop} eligibilityMode={eligibilityMode}
-          floatGroup={floatGroup} floatEventPairs={floatEventPairs} threshold={threshold}
         />
         <ClaimCard
           isPreview={isPreview}

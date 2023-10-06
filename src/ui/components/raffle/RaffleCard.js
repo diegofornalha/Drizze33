@@ -105,7 +105,7 @@ export default function RaffleCard(props) {
 
   // Only created Raffle has claimStatus
   const { raffle, claimStatus, user, nft, selectedTokens,
-    eligibilityMode, floatGroup, floatEventPairs, threshold } = props
+    eligibilityMode, floatEventPairs, threshold } = props
   const raffleID = (raffle && raffle.raffleID) || props.raffleID
   const name = (raffle && raffle.name) || props.name
   const host = (raffle && raffle.host) || props.host
@@ -142,7 +142,6 @@ export default function RaffleCard(props) {
         <CriteriaCard
           type="Raffle"
           raffle={raffle} eligibilityMode={eligibilityMode}
-          floatGroup={floatGroup} floatEventPairs={floatEventPairs} threshold={threshold}
         />
         <ActionCard
           isPreview={isPreview}

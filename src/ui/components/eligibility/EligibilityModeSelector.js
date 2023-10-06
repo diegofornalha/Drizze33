@@ -1,6 +1,6 @@
 import { RadioGroup } from '@headlessui/react'
 import Hints from '../../lib/hints'
-import { FloatModeFloatEvent, FloatModeFloatGroup } from '../float/FloatPicker'
+import { FloatModeFloatEvent } from '../float/FloatPicker'
 import { checkPacketMode } from '../drop/PacketModeSelector'
 import Decimal from 'decimal.js'
 import { useEffect } from 'react'

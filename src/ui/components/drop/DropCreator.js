@@ -10,7 +10,7 @@ import DropCard from './DropCard'
 import {
   createDrop
 } from '../../lib/cloud-transactions'
-import { classNames, floatEventInputHandler, floatGroupInputHandler, isValidHttpUrl } from '../../lib/utils'
+import { classNames, floatEventInputHandler, isValidHttpUrl } from '../../lib/utils'
 
 import { useRecoilState } from "recoil"
 import {
@@ -21,7 +21,6 @@ import {
 } from "../../lib/atoms"
 import EligibilityModeSelector, {
   EligibilityModeFLOAT,
-  EligibilityModeFLOATGroup,
   EligibilityModeWhitelistWitAmount,
   EligibilityModeWhitelist
 } from '../eligibility/EligibilityModeSelector'
@@ -44,7 +43,7 @@ const CreatedAtPlaceholder = new Date('2020-08-01T08:16:16Z')
 
 export default function DropCreator(props) {
   const router = useRouter()
-  const { float, float_group } = router.query
+  const { float } = router.query
 
   const [, setShowBasicNotification] = useRecoilState(showBasicNotificationState)
   const [, setBasicNotificationContent] = useRecoilState(basicNotificationContentState)
@@ -80,7 +79,6 @@ export default function DropCreator(props) {
   // [{eventID: xxx, eventHost: xxx}]
   const [floatEventPairs, setFloatEventPairs] = useState([])
   // {groupName: xxx, groupHost: xxx}
-  const [floatGroup, setFloatGroup] = useState(null)
   const [threshold, setThreshold] = useState('')
 
   // For Packet
@@ -118,14 +116,7 @@ export default function DropCreator(props) {
         setEligibilityMode(EligibilityModeFLOAT)
       }).catch(console.error)
     }
-
-    if (float_group && float_group.trim() != '') {
-      floatGroupInputHandler(float_group).then((group) => {
-        setFloatGroup(group)
-        setEligibilityMode(EligibilityModeFLOATGroup)
-      })
-    }
-  }, [float, float_group])
+  }, [float])
 
   const checkBasicParams = () => {
     if (!name || name.trim() == "") {
@@ -312,11 +303,10 @@ export default function DropCreator(props) {
         <FloatReviewer
           floatMode={mode.detail}
           threshold={threshold} setThreshold={setThreshold}
-          rawFloatInput={float || float_group}
+          rawFloatInput={float}
           floatEvents={floatEvents}
           setFloatEvents={setFloatEvents}
           setFloatEventPairs={setFloatEventPairs}
-          setFloatGroup={setFloatGroup}
         />
       )
     }
@@ -355,7 +345,6 @@ export default function DropCreator(props) {
             amount={AmountPlaceholder}
             eligibilityMode={eligibilityMode}
             packetMode={packetMode}
-            floatGroup={floatGroup}
             floatEventPairs = {floatEventPairs}
             threshold={threshold}
           />
