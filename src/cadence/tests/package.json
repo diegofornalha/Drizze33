@@ -4,24 +4,24 @@
     "description": "",
     "main": "test.js",
     "scripts": {
-      "test": "jest --runInBand",
-      "cloud": "jest cloud.test.js",
-      "mist": "jest mist.test.js"
+        "test": "jest --runInBand",
+        "cloud": "jest cloud.test.js",
+        "mist": "jest mist.test.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@babel/core": "^7.17.5",
-        "@babel/preset-env": "^7.16.11",
+        "@babel/core": "^7.23.0",
+        "@babel/preset-env": "^7.22.20",
+        "@babel/preset-react": "^7.22.15",
         "babel-jest": "^27.5.1",
         "jest": "^27.5.1",
         "jest-environment-node": "^27.5.1"
     },
     "dependencies": {
         "@onflow/fcl": "^1.6.0",
-        "@onflow/flow-js-testing": "^0.3.0-alpha.17",
+        "@onflow/flow-js-testing": "^0.4.0",
         "decimal.js": "^10.4.2"
     }
 }
-  
