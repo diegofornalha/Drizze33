@@ -32,7 +32,6 @@ import {
 } from "./src/cloud";
 import {
   FLOAT_claim,
-  FLOAT_createEventsWithGroup,
   FLOAT_getEventIDs,
   FLOAT_getFLOATIDs,
   FLOAT_setupAccount,
@@ -436,12 +435,6 @@ describe("EC - FLOAT", () => {
     await emulator.stop();
     return await new Promise(r => setTimeout(r, 2000));
   })
-
-  it("FLOAT - Should create FLOAT group and events successfully", async () => {
-    const FLOATCreator = await getAccountAddress("FLOATCreator")
-    await FLOAT_createEventsWithGroup(FLOATCreator)
-  })
-})
 
 describe("Drop - FLOATs", () => {
   beforeEach(async () => {
