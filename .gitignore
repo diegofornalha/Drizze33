@@ -1,0 +1,60 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# testing
+coverage
+
+# next.js
+.next
+out
+
+# production
+build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+flow.secret.json
+*.private.json
+*.bak
+*.next
+src/ui/.next
+src/ui/.next/cache
+src/ui/.next/cache/webpack/
+src/ui/.next/build-manifest.json
+src/ui/.next/server/middleware-build-manifest.js
+src/ui/.next/server/pages-manifest.json
+src/ui/.next/cache/images
+src/ui/.next/cache/webpack/client-development
+src/ui/.next/server/pages-manifest.json
+src/ui/.next/cache/webpack/server-development
+src/ui/.next/cache/webpack/client-development/0.pack
+src/ui/.next/cache/webpack/client-development/1.pack
+src/ui/.next/cache/webpack/client-development/2.pack
+src/ui/.next/cache/webpack/client-development/3.pack
+src/ui/.next/cache/webpack/client-development/4.pack
+
+src/ui/.next/cache/webpack/server-development/index.pack
+src/ui/.next/server/pages-manifest.json
+src/ui/.next/cache/webpack/client-development/0.pack
+src/ui/.next/cache/webpack/client-development/1.pack
+src/ui/.next/cache/webpack/client-development/2.pack
+src/ui/.next/cache/webpack/client-development/3.pack
+src/ui/.next/cache/webpack/client-development/4.pack
